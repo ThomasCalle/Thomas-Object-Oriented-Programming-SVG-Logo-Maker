@@ -1,9 +1,60 @@
-// Runs the application using imports from lib/
-
-// Included packages required for this file.
-const fs = require("fs");
+const filesystem = require('./node_modules/graceful-fs/graceful-fs')
 const inquirer = require("inquirer");
-const {generateSVG} = require("./lib/shape");
+const svgJS = require("./lib/svg.js")
+
+
+class Shape{
+
+    constructor(){
+        this.color=''
+    }
+    setColor(color){
+        this.color=(color);
+    }
+}
+
+class Circle extends Shape{
+    render(){`<circle cx="25" cy="75" r="20" stroke="red" fill="${this.color}" stroke-width="8"/>`
+
+}
+}
+
+class Triangle extends Shape{
+    render(){
+        //return `<polygon height="100%" width="100%" points="25,75 75,25 25,25" fill="${this.color}" stroke-width="8"/>
+        return `<polygon height="100%" width="100%" points="0,200 300,200 150,0" fill="${this.color}" stroke-width="8"/>`
+    }
+}
+
+class Square extends Shape{
+    render(){
+        return `<rect height="100%" width="100%" fill="${this.color}" stroke-width="8"/>`
+    }
+}
+function generateSVG(text,color,shape,image){
+    if (shape===`Circle`){
+const newShape = new Circle()
+}
+}
+
+class Svg{
+    constructor(){
+        this.textElement = ''
+        this.shapeElement = ''
+    }
+    render(){
+        //return `<svg width="300" height="200"> ${this.shapeElement}${this.textElement}</svg>`
+        return `${this.shapeElement}\n${this.textElement}`
+    }
+    setTextElement(text,color){
+        this.textElement = `<text x="150" y="125" font-size="60" text-anchor="middle" fill="${color}">${text}</text>`
+    }
+    setShapeElement(shape){
+        this.shapeElement = shape.render()
+
+    }
+
+}
 
 // Array of questions for user input.
 const questions = [
@@ -32,7 +83,8 @@ const questions = [
 
 // Function to write data to file
 function writeToFile(fileName, data) {
-    fs.writeFile(fileName, data, function (err) {
+	console.log("Writing [" + data + "] to file [" + fileName + "]")
+    filesystem.writeFile(fileName, data, function (err) {
         if (err) {
             return console.log(err);
         }
@@ -40,24 +92,63 @@ function writeToFile(fileName, data) {
     });
 }
 
-// Collect user input and generate SVG file
-inquirer
-    .prompt(questions)
-    .then((answers) => {
-// ask the user for the specifics of the svg
-// based onthe ukser input we are going to conditinaly render a shape
-// once we have that shepe we will pass it to the Svg class's setShapeElement method
-// call the setTextElement method on the svg to create the text element
-// once the two methods have been run you can call render on the svg class to get the finalized svg string
-// then write that string to a file with a .svg extension
+async function init() {
+    console.log("Starting init");
+	var svgString = "";
+    var svg_file = "logo.svg"
+    var html_file = "logo.html"; 
 
-        const svgData = generateSVG(answers.text, answers["text-color"], answers.shape, answers["pixel-image"]);
-        writeToFile("output.svg", svgData);
-    })
-    .catch((error) => {
-        console.log(error);
-    });
+    // Prompt the user for answers
+    const answers = await inquirer.prompt(questions);
 
-    // Call the init function to start the app.
+	//user text
+	user_text = answers.text;
+	console.log("User text: [" + user_text + "]");
+	//user font color
+	user_font_color = answers["text-color"];
+	console.log("User font color: [" + user_font_color + "]");
+	//user shape color
+	user_shape_color = answers.shape;
+	console.log("User shape color: [" + user_shape_color + "]");
+	//user shape type
+	user_shape_type = answers["pixel-image"];
+	console.log("User entered shape = [" + user_shape_type + "]");
+	
+	//user shape
+	let user_shape;
+	if (user_shape_type === "Square" || user_shape_type === "square") {
+		user_shape = new Square();
+		console.log("User selected Square shape");
+	}
+	else if (user_shape_type === "Circle" || user_shape_type === "circle") {
+		user_shape = new Circle();
+		console.log("User selected Circle shape");
+	}
+	else if (user_shape_type === "Triangle" || user_shape_type === "triangle") {
+		user_shape = new Triangle();
+		console.log("User selected Triangle shape");
+	}
+	else {
+		console.log("Invalid shape!");
+	}
+	user_shape.setColor(user_shape_color);
+
+	// Create a new Svg instance and add the shape and text elements to it
+	var svg = new Svg();
+	svg.setTextElement(user_text, user_font_color);
+	svg.setShapeElement(user_shape);
+	svgString = svg.render();
+	
+	//Print shape to log
+	console.log("Displaying shape:\n\n" + svgString);
+	//document.getElementById("svg_image").innerHTML = svgString;
+
+	console.log("Shape generation complete!");
+	console.log("Writing shape to file...");
+	writeToFile(svg_file, svgString);
+    writeToFile(html_file, svgString);
+
+}
+
+// Call the init function to start the app.
 init();
-
