@@ -2,7 +2,6 @@ const filesystem = require('./node_modules/graceful-fs/graceful-fs')
 const inquirer = require("inquirer");
 const svgJS = require("./lib/svg.js")
 
-
 class Shape{
 
     constructor(){
@@ -14,9 +13,9 @@ class Shape{
 }
 
 class Circle extends Shape{
-    render(){`<circle cx="25" cy="75" r="20" stroke="red" fill="${this.color}" stroke-width="8"/>`
-
-}
+    render(){
+        return `<circle cx="50%" cy="50%" r="100" height="100%" width="100%" fill="${this.color}" stroke-width="8"/>`
+    }
 }
 
 class Triangle extends Shape{
@@ -28,13 +27,8 @@ class Triangle extends Shape{
 
 class Square extends Shape{
     render(){
-        return `<rect height="100%" width="100%" fill="${this.color}" stroke-width="8"/>`
+        return `<rect x="50" height="200" width="200" fill="${this.color}" stroke-width="8"/>`
     }
-}
-function generateSVG(text,color,shape,image){
-    if (shape===`Circle`){
-const newShape = new Circle()
-}
 }
 
 class Svg{
@@ -44,7 +38,7 @@ class Svg{
     }
     render(){
         //return `<svg width="300" height="200"> ${this.shapeElement}${this.textElement}</svg>`
-        return `${this.shapeElement}\n${this.textElement}`
+        return `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8" /></head><body><svg xmlns="http://www.w3.org/2000/svg" width="300" height="200">${this.shapeElement}${this.textElement}</svg></body></html>`
     }
     setTextElement(text,color){
         this.textElement = `<text x="150" y="125" font-size="60" text-anchor="middle" fill="${color}">${text}</text>`
@@ -53,7 +47,7 @@ class Svg{
         this.shapeElement = shape.render()
 
     }
-
+    
 }
 
 // Array of questions for user input.
@@ -88,21 +82,28 @@ function writeToFile(fileName, data) {
         if (err) {
             return console.log(err);
         }
-        console.log("Congratulations on creating your image!");
+        console.log("Congratulations, you have Generated a logo.svg!");
     });
 }
 
 async function init() {
     console.log("Starting init");
 	var svgString = "";
-    var svg_file = "logo.svg"
-    var html_file = "logo.html"; 
+	var svg_file = "logo.svg";
 
     // Prompt the user for answers
     const answers = await inquirer.prompt(questions);
 
 	//user text
-	user_text = answers.text;
+	var user_text = "";
+	if (answers.text.length > 0 && answers.text.length < 4) {
+		// 1-3 chars, valid entry
+		user_text = answers.text;
+	} else {
+		// 0 or 4+ chars, invalid entry
+		console.log("Invalid user text field detected! Please enter 1-3 Characters, no more and no less");
+        return;
+	}
 	console.log("User text: [" + user_text + "]");
 	//user font color
 	user_font_color = answers["text-color"];
@@ -145,10 +146,6 @@ async function init() {
 
 	console.log("Shape generation complete!");
 	console.log("Writing shape to file...");
-	writeToFile(svg_file, svgString);
-    writeToFile(html_file, svgString);
-
+	writeToFile(svg_file, svgString); 
 }
-
-// Call the init function to start the app.
-init();
+init()
