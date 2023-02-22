@@ -1,34 +1,6 @@
 const filesystem = require('./node_modules/graceful-fs/graceful-fs')
 const inquirer = require("inquirer");
-const svgJS = require("./lib/svg.js")
-
-class Shape{
-
-    constructor(){
-        this.color=''
-    }
-    setColor(color){
-        this.color=(color);
-    }
-}
-
-class Circle extends Shape{
-    render(){
-        return `<circle cx="50%" cy="50%" r="100" height="100%" width="100%" fill="${this.color}" stroke-width="8"/>`
-    }
-}
-
-class Triangle extends Shape{
-    render(){
-        return `<polygon height="100%" width="100%" points="0,200 300,200 150,0" fill="${this.color}" stroke-width="8"/>`
-    }
-}
-
-class Square extends Shape{
-    render(){
-        return `<rect x="50" height="200" width="200" fill="${this.color}" stroke-width="8"/>`
-    }
-}
+const {Circle, Square, Triangle} = require("./lib/shapes");
 
 class Svg{
     constructor(){
@@ -37,7 +9,7 @@ class Svg{
     }
     render(){
         //return `<svg width="300" height="200"> ${this.shapeElement}${this.textElement}</svg>`
-        return `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8" /></head><body><svg xmlns="http://www.w3.org/2000/svg" width="300" height="200">${this.shapeElement}${this.textElement}</svg></body></html>`
+        return `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8" /></head><body><svg xmlns="http://www.w3.org/2000/svg"> width="300" height="200">${this.shapeElement}${this.textElement}</svg></body></html>`
     }
     setTextElement(text,color){
         this.textElement = `<text x="150" y="125" font-size="60" text-anchor="middle" fill="${color}">${text}</text>`
