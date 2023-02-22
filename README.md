@@ -1,4 +1,4 @@
-# Thomas Object Oriented Programming SVG LOGO MAKER
+# Thomas' Object Oriented Programming SVG LOGO MAKER
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
   
@@ -17,6 +17,7 @@
 - [Acknowledgments](#Acknowledgments)
 
 # Overview
+
 ## The Challenge:
 
 ## User Story
@@ -56,8 +57,7 @@ THEN I am shown a 300x200 pixel image that matches the criteria I entered
 ## Installation Process
 
 ## Built With
-- Saiyan Pride
-- JavaScript
+- Dynamic JavaScript
 - Node.js
 - Jest [Version 29.4.3](https://www.npmjs.com/package/jest)
 - Inquirer.js: [Version 8.2.4](https://www.npmjs.com/package/inquirer/v/8.2.4)

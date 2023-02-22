@@ -20,7 +20,6 @@ class Circle extends Shape{
 
 class Triangle extends Shape{
     render(){
-        //return `<polygon height="100%" width="100%" points="25,75 75,25 25,25" fill="${this.color}" stroke-width="8"/>
         return `<polygon height="100%" width="100%" points="0,200 300,200 150,0" fill="${this.color}" stroke-width="8"/>`
     }
 }
