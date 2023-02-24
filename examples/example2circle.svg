@@ -2,6 +2,6 @@
 
 <circle cx="50%" cy="50%" r="100" height="100%" width="100%" fill="GREEN"/>
 
-<text x="150" y="125" font-size="60" text-anchor="middle" fill="WHITE">SVG</text>
+<text x="150" y="125" font-size="60" text-anchor="middle" fill="BLUE">MVM</text>
 
 </svg>

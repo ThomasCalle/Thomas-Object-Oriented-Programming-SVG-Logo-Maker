@@ -57,12 +57,20 @@ THEN I am shown a 300x200 pixel image that matches the criteria I entered
 6. At your discretion, you may rename the "logo.svg" file to the file name of your choice.
 7. (Optional) Regarding future use, you may alter the prompted questions within the index.js to best suit your needs.
 8. (Optional) The SVG Logo Maker serves as a foundation so you are not limited to altering the files (as you have my permission) to create the best possible "logo.svg" file.
-### Solution URL: 
+
+## Solution URL:
 [Solution URL Link:]( https://thomascalle.github.io/Thomas-Object-Oriented-Programming-SVG-Logo-Maker/)
-### Screenshot:
-![](.)
-### YouTube Video Walkthrough:
-[Click Here to Watch]()
+
+## YouTube Walkthrough Video:
+[Click Here to Watch](https://www.youtube.com/watch?v=GJYMcLus3v0&t=18s)
+
+## Screenshots:
+### Figure 1. Command line application
+![](./images/svg-logo-maker.png) 
+### Figure 2. Jest Testing "npm test"
+![](./images/jest-test.png)
+### Figure 3. Generated "logo.svg" file
+![](./images/generated-logo.svg.png)
 
 ## Installation Process
 1. Clone the repository: [Thomas' Object Oriented Programming SVG Logo Maker](https://thomascalle.github.io/Thomas-Object-Oriented-Programming-SVG-Logo-Maker/)
@@ -74,6 +82,7 @@ THEN I am shown a 300x200 pixel image that matches the criteria I entered
 4. Open the integrated terminal for the document and complete the respective installation guides provided above in section (2.) to ensure the cloned documentation will operate.
 
 ## Built With
+- Saiyan Pride
 - Dynamic JavaScript
 - Node.js [Version 16.18.1](https://nodejs.org/en/blog/release/v16.18.1/)
 - Jest [Version 29.4.3](https://www.npmjs.com/package/jest)
