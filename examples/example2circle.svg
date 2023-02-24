@@ -5,3 +5,10 @@
 <text x="150" y="125" font-size="60" text-anchor="middle" fill="BLUE">MVM</text>
 
 </svg>
+
+<!-- Note: When generating a new "logo.svg" file through the command line prompt it will
+'over-write' any pre-existing svg files named "logo.svg". So please ensure you have saved your "logo.svg" file under a new file name 
+ending with ".svg" as this ensures your newly generated work is not altered and does not collide with any newly generated "logo.svg" files when 
+initiated through the SVG logo maker. E.g: I have stored all fo my previously created work in the "examples" folder listed in the directory - in addition, each one of these
+generated files have been assigned with a unique name (created by the user. aka myself) to ensure there are no collisions with newly generated files named "logo.svg". -->
+<!--  -->
